@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="imgage/x-icon" href="{% static 'blog/favicon.ico' %}">
+
+    <title>Welcome To Home Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'blog/bootstrap.min.css' %}" rel="stylesheet">
+    {% block staticfiles %}
+    
+    {% endblock staticfiles %}
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'blog/fontawesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'blog/clean-blog.min.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="home.html"><h1>@writeIt</h1></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" 
+        aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog-index'%}">Index</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Create</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+              </li>
+              
+              
+            {% else %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'blog-home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">SignUp</a>
+              </li>
+            {% endif %}
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    <div class="container">
+    {% block content %}
+    
+    {% endblock content %}
+    </div>
+    
+
+   
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'blog/jquery.min.js' %}"></script>
+    <script src="{% static 'blog/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'blog/clean-blog.min.js' %}"></script>
+
+  </body>
+
+</html>
